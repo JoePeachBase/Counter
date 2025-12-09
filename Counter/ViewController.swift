@@ -2,11 +2,11 @@ import UIKit
 
 final class ViewController: UIViewController {
 
-    @IBOutlet weak var counterLabel: UILabel!
-    @IBOutlet weak var increaseCounterButton: UIButton!
-    @IBOutlet weak var decreaseCounterButton: UIButton!
-    @IBOutlet weak var resetCounterButton: UIButton!
-    @IBOutlet weak var logTextView: UITextView!
+    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var increaseCounterButton: UIButton!
+    @IBOutlet private weak var decreaseCounterButton: UIButton!
+    @IBOutlet private weak var resetCounterButton: UIButton!
+    @IBOutlet private weak var logTextView: UITextView!
     
     private var counterValue = 0
     
@@ -16,27 +16,6 @@ final class ViewController: UIViewController {
         setupCounterLabel()
         setupCounterButtons()
         setupCounterLogView()
-    }
-
-    @IBAction func increaseCounterButtonDidTapped(_ sender: Any) {
-        counterValue += 1
-        counterLabel.text = "Значение счётчика: \(counterValue)"
-        addLog(message: "значение изменено на +1\n")
-    }
-    
-    @IBAction func decreaseCounterButtonDidTapped(_ sender: Any) {
-        guard counterValue > 0 else {
-            addLog(message: "попытка уменьшить значение счётчика ниже 0\n")
-            return }
-        counterValue -= 1
-        counterLabel.text = "Значение счётчика: \(counterValue)"
-        addLog(message: "значение изменено на -1\n")
-    }
-    
-    @IBAction func counterResetButton(_ sender: Any) {
-        counterValue = 0
-        counterLabel.text = "Значение счётчика: \(counterValue)"
-        addLog(message: "значение сброшено\n")
     }
     
     private func setupCounterLabel() {
@@ -74,6 +53,27 @@ final class ViewController: UIViewController {
         let date = Date()
         let logEntry = "\(date.formatted()) \(message)"
         logTextView.text = logEntry + logTextView.text
+    }
+
+    @IBAction private func increaseCounterButtonDidTapped(_ sender: Any) {
+        counterValue += 1
+        counterLabel.text = "Значение счётчика: \(counterValue)"
+        addLog(message: "значение изменено на +1\n")
+    }
+    
+    @IBAction private func decreaseCounterButtonDidTapped(_ sender: Any) {
+        guard counterValue > 0 else {
+            addLog(message: "попытка уменьшить значение счётчика ниже 0\n")
+            return }
+        counterValue -= 1
+        counterLabel.text = "Значение счётчика: \(counterValue)"
+        addLog(message: "значение изменено на -1\n")
+    }
+    
+    @IBAction private func counterResetButton(_ sender: Any) {
+        counterValue = 0
+        counterLabel.text = "Значение счётчика: \(counterValue)"
+        addLog(message: "значение сброшено\n")
     }
 }
 
